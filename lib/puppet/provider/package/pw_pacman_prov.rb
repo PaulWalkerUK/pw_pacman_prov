@@ -2,7 +2,7 @@ require 'puppet/provider/package'
 require 'set'
 require 'uri'
 
-Puppet::Type.type(:package).provide :pacman, :parent => Puppet::Provider::Package do
+Puppet::Type.type(:package).provide :pw_pacman_prov, :parent => Puppet::Provider::Package do
   desc "Support for the Package Manager Utility (pacman) used in Archlinux.
 
   This provider supports the `install_options` attribute, which allows command-line flags to be passed to pacman.

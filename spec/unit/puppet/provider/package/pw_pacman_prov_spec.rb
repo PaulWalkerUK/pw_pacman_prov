@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'stringio'
 
-describe Puppet::Type.type(:package).provider(:pacman) do
+describe Puppet::Type.type(:package).provider(:pw_pacman_prov) do
   let(:no_extra_options) { { :failonfail => true, :combine => true, :custom_environment => {} } }
   let(:executor) { Puppet::Util::Execution }
   let(:resolver) { Puppet::Util }
