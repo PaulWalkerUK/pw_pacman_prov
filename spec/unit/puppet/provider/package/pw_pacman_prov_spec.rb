@@ -6,7 +6,7 @@ describe Puppet::Type.type(:package).provider(:pw_pacman_prov) do
   let(:executor) { Puppet::Util::Execution }
   let(:resolver) { Puppet::Util }
 
-  let(:resource) { Puppet::Type.type(:package).new(:name => 'package', :provider => 'pacman') }
+  let(:resource) { Puppet::Type.type(:package).new(:name => 'package', :provider => 'pw_pacman_prov') }
   let(:provider) { described_class.new(resource) }
 
   before do
@@ -209,7 +209,7 @@ yetanotherpackage 1.2.3.4
 EOF
       expect(executor).to receive(:execpipe).with(['/usr/bin/pacman', '-Sgg', 'package']).and_yield('')
 
-      expect(provider.query).to eq({ :name => 'package', :ensure => '1.01.3-2', :provider => :pacman,  })
+      expect(provider.query).to eq({ :name => 'package', :ensure => '1.01.3-2', :provider => :pw_pacman_prov,  })
     end
 
     it "should return a hash indicating that the package is missing" do
@@ -258,13 +258,13 @@ EOF
       expect(instances.length).to eq(2)
 
       expect(instances[0].properties).to eq({
-          :provider => :pacman,
+          :provider => :pw_pacman_prov,
           :ensure => '1.23-4',
           :name => 'package1'
       })
 
       expect(instances[1].properties).to eq({
-          :provider => :pacman,
+          :provider => :pw_pacman_prov,
           :ensure => '2.00',
           :name => 'package2'
       })
@@ -284,17 +284,17 @@ EOF
       expect(instances.length).to eq(3)
 
       expect(instances[0].properties).to eq({
-        :provider => :pacman,
+        :provider => :pw_pacman_prov,
         :ensure   => '1.00',
         :name     => 'package1'
       })
       expect(instances[1].properties).to eq({
-        :provider => :pacman,
+        :provider => :pw_pacman_prov,
         :ensure   => '1.00',
         :name     => 'package2'
       })
       expect(instances[2].properties).to eq({
-        :provider => :pacman,
+        :provider => :pw_pacman_prov,
         :ensure   => 'package1 1.00, package2 1.00',
         :name     => 'group1'
       })
@@ -313,7 +313,7 @@ EOF
       expect(instances.length).to eq(1)
 
       expect(instances[0].properties).to eq({
-        :provider => :pacman,
+        :provider => :pw_pacman_prov,
         :ensure   => '1.00',
         :name     => 'package1'
       })
